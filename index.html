@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pawsome Walks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdf6ec;
+      --bark:  #3b2a1a;
+      --moss:  #4a6741;
+      --clay:  #c07a4f;
+      --sand:  #e8d5b5;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--bark);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    /* Subtle grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Decorative circle */
+    .blob {
+      position: fixed;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--sand) 0%, transparent 70%);
+      top: -120px;
+      right: -120px;
+      z-index: 0;
+      animation: drift 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(-20px, 20px) scale(1.05); }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 560px;
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .paw {
+      font-size: 3.2rem;
+      display: block;
+      margin-bottom: 1.2rem;
+      animation: bounce 2.4s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      line-height: 1.1;
+      color: var(--bark);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 span {
+      color: var(--moss);
+    }
+
+    .tagline {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--clay);
+      letter-spacing: 0.04em;
+      margin-bottom: 2.4rem;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--clay);
+      border-radius: 2px;
+      margin: 0 auto 2.4rem;
+      animation: widen 1.2s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes widen {
+      from { width: 0; opacity: 0; }
+      to   { width: 48px; opacity: 1; }
+    }
+
+    p {
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.75;
+      color: #5a4030;
+      margin-bottom: 2.8rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--moss);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+    }
+
+    .footer-note {
+      position: fixed;
+      bottom: 1.4rem;
+      font-size: 0.72rem;
+      color: var(--clay);
+      opacity: 0.6;
+      letter-spacing: 0.06em;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="blob"></div>
+
+  <div class="card">
+    <span class="paw">🐾</span>
+    <h1>Hello, <span>World.</span></h1>
+    <p class="tagline">Your dog walking website starts here.</p>
+    <div class="divider"></div>
+    <p>
+      This is the beginning of something wonderful — a home on the web for tail wags,
+      muddy paws, and happy dogs. More coming very soon.
+    </p>
+    <span class="badge">🌿 Coming Soon</span>
+  </div>
+
+  <p class="footer-note">Deployed on Netlify · Built with love</p>
+</body>
+</html>
