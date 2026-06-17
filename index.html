@@ -3,165 +3,531 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pawsome Walks</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <title>Fox & Paws Pet Services | Dog Walking & Pet Care in Brentwood</title>
+  <meta name="description" content="Professional dog walking, pet sitting and pet care services in Brentwood, West Horndon and surrounding areas. Contact Sare at Fox & Paws today." />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #fdf6ec;
-      --bark:  #3b2a1a;
-      --moss:  #4a6741;
-      --clay:  #c07a4f;
-      --sand:  #e8d5b5;
+      --rust:       #D4561A;
+      --rust-light: #F07040;
+      --rust-pale:  #FDE8DC;
+      --cream:      #FFFAF6;
+      --warm-white: #FFF5EE;
+      --brown:      #3D1F0D;
+      --mid-brown:  #7A4528;
+      --soft-brown: #B07050;
+      --green:      #4A7C59;
+      --green-pale: #EAF2EC;
     }
 
+    html { scroll-behavior: smooth; }
+
     body {
-      background-color: var(--cream);
-      color: var(--bark);
-      font-family: 'DM Sans', sans-serif;
-      min-height: 100vh;
+      font-family: 'Quicksand', sans-serif;
+      background: var(--cream);
+      color: var(--brown);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1.5px solid var(--rust-pale);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.6rem;
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--rust);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.6rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--mid-brown);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--rust); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--warm-white);
+      min-height: 100svh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      text-align: center;
+      padding: 7rem 2rem 4rem;
+      position: relative;
       overflow: hidden;
     }
 
-    /* Subtle grain overlay */
-    body::before {
+    /* Soft warm circle glow */
+    .hero::after {
       content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #FDDCC8 0%, transparent 65%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* Decorative circle */
-    .blob {
-      position: fixed;
-      width: 520px;
-      height: 520px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--sand) 0%, transparent 70%);
-      top: -120px;
-      right: -120px;
-      z-index: 0;
-      animation: drift 8s ease-in-out infinite alternate;
-    }
+    .hero > * { position: relative; z-index: 1; }
 
-    @keyframes drift {
-      from { transform: translate(0, 0) scale(1); }
-      to   { transform: translate(-20px, 20px) scale(1.05); }
-    }
-
-    .card {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      max-width: 560px;
-      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(32px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .paw {
-      font-size: 3.2rem;
-      display: block;
+    .hero-paw {
+      font-size: 2.8rem;
       margin-bottom: 1.2rem;
-      animation: bounce 2.4s ease-in-out infinite;
+      display: block;
+      animation: sway 3s ease-in-out infinite;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-8px); }
+    @keyframes sway {
+      0%, 100% { transform: rotate(-6deg); }
+      50%       { transform: rotate(6deg); }
     }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 6vw, 3.8rem);
-      line-height: 1.1;
-      color: var(--bark);
-      margin-bottom: 0.5rem;
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--soft-brown);
+      margin-bottom: 1rem;
     }
 
-    h1 span {
-      color: var(--moss);
-    }
-
-    .tagline {
-      font-size: 1.05rem;
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3rem, 14vw, 5.5rem);
       font-weight: 300;
-      color: var(--clay);
-      letter-spacing: 0.04em;
+      font-style: italic;
+      color: var(--brown);
+      line-height: 1.05;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--rust);
+    }
+
+    .hero-tagline {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1rem, 3.5vw, 1.25rem);
+      font-weight: 300;
+      color: var(--mid-brown);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
       margin-bottom: 2.4rem;
     }
 
-    .divider {
-      width: 48px;
-      height: 3px;
-      background: var(--clay);
-      border-radius: 2px;
-      margin: 0 auto 2.4rem;
-      animation: widen 1.2s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    @keyframes widen {
-      from { width: 0; opacity: 0; }
-      to   { width: 48px; opacity: 1; }
-    }
-
-    p {
-      font-size: 1.05rem;
-      font-weight: 400;
-      line-height: 1.75;
-      color: #5a4030;
-      margin-bottom: 2.8rem;
-    }
-
-    .badge {
-      display: inline-block;
-      background: var(--moss);
-      color: #fff;
+    .chip {
+      background: var(--rust-pale);
+      color: var(--rust);
       font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      font-weight: 700;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--rust);
+      color: #fff;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.9rem 2.2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 4px 20px rgba(212,86,26,0.25);
+    }
+
+    .hero-cta:hover {
+      background: var(--rust-light);
+      transform: translateY(-2px);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      color: var(--soft-brown);
+      opacity: 0.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      animation: bob 2s ease-in-out infinite;
+    }
+
+    .scroll-hint::after { content: '↓'; font-size: 1rem; }
+
+    @keyframes bob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(5px); }
+    }
+
+    /* ── SHARED SECTION STYLES ── */
+    .section-wrap {
+      padding: 4.5rem 1.8rem;
+      max-width: 660px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 7vw, 2.8rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--brown);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-body {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: var(--mid-brown);
+      font-weight: 500;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--rust-pale);
+    }
+
+    #services .section-wrap { max-width: 700px; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.4rem 1.2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(212,86,26,0.1);
+    }
+
+    .service-icon {
+      font-size: 1.9rem;
+      display: block;
+      margin-bottom: 0.55rem;
+    }
+
+    .service-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 0.3rem;
+    }
+
+    .service-desc {
+      font-size: 0.8rem;
+      color: var(--soft-brown);
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--cream);
+    }
+
+    .about-card {
+      background: var(--green-pale);
+      border-radius: 20px;
+      padding: 1.6rem;
+      margin-top: 1.6rem;
+      border-left: 4px solid var(--green);
+    }
+
+    .about-card p {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--green);
+      line-height: 1.65;
+    }
+
+    /* ── AREA ── */
+    #area {
+      background: var(--brown);
+    }
+
+    #area .section-label { color: var(--rust-light); }
+    #area .section-title { color: var(--warm-white); }
+    #area .section-body  { color: rgba(255,245,238,0.7); }
+
+    .area-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.6rem;
+    }
+
+    .area-pill {
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
       padding: 0.45rem 1.1rem;
       border-radius: 999px;
     }
 
-    .footer-note {
-      position: fixed;
-      bottom: 1.4rem;
-      font-size: 0.72rem;
-      color: var(--clay);
-      opacity: 0.6;
-      letter-spacing: 0.06em;
-      z-index: 1;
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--warm-white);
+      text-align: center;
+    }
+
+    .contact-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      padding: 1.05rem 1.6rem;
+      border-radius: 16px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .btn-call      { background: var(--rust);      color: #fff; }
+    .btn-whatsapp  { background: #25D366;           color: #fff; }
+    .btn-instagram {
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: #fff;
+    }
+
+    .contact-note {
+      margin-top: 2rem;
+      font-size: 0.82rem;
+      color: var(--soft-brown);
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown);
+      text-align: center;
+      padding: 1.4rem;
+      color: rgba(255,245,238,0.5);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 400px) {
+      .services-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="blob"></div>
 
-  <div class="card">
-    <span class="paw">🐾</span>
-    <h1>Hello, <span>World.</span></h1>
-    <p class="tagline">Your awesome dog walking website starts here.</p>
-    <div class="divider"></div>
-    <p>
-      This is the beginning of something wonderful — a home on the web for tail wags,
-      muddy paws, and happy dogs. More coming very soon!!! Stay tuned for updates and get ready to unleash the fun.
-    </p>
-    <span class="badge">🌿 Coming Soon</span>
-  </div>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Fox & Paws</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-  <p class="footer-note">Deployed on Netlify · Built with love</p>
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-paw">🐾</span>
+    <p class="hero-eyebrow">Brentwood & West Horndon</p>
+    <h1>Fox &<br><em>Paws</em></h1>
+    <p class="hero-tagline">Dog walking & pet care,<br>done with love.</p>
+    <div class="hero-chips">
+      <span class="chip">🐕 Dog Walking</span>
+      <span class="chip">🐈 Cat Visits</span>
+      <span class="chip">🏡 Pet Sitting</span>
+      <span class="chip">☀️ Day Care</span>
+    </div>
+    <a class="hero-cta" href="#contact">Get in touch</a>
+    <span class="scroll-hint">Scroll</span>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-wrap">
+      <p class="section-label">What we offer</p>
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-body">From morning walks to home visits, we offer a range of flexible services to keep your pets happy and healthy while you get on with your day.</p>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">🐕‍🦺</span>
+          <p class="service-name">Group Walks</p>
+          <p class="service-desc">Socialise and explore with a small, friendly group of dogs.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">🦮</span>
+          <p class="service-name">Solo Walks</p>
+          <p class="service-desc">One-to-one attention, tailored to your dog's own pace.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">🐱</span>
+          <p class="service-name">Cat Visits</p>
+          <p class="service-desc">Drop-in visits to feed, play and give your cat some company.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">🐶</span>
+          <p class="service-name">Puppy Visits</p>
+          <p class="service-desc">Pop-in visits to check in on your pup throughout the day.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">🏡</span>
+          <p class="service-name">Pet Sitting</p>
+          <p class="service-desc">Your pet stays safe and settled in the comfort of their own home.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">☀️</span>
+          <p class="service-name">Day Care</p>
+          <p class="service-desc">A full day of company and fun so they're never home alone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-wrap">
+      <p class="section-label">Who we are</p>
+      <h2 class="section-title">About Sare</h2>
+      <p class="section-body">
+        Hi, I'm Sare — an animal lover through and through, and a familiar face to many pets in the local area. After some time away, I'm thrilled to be back doing what I love most: caring for your animals like they're my own.
+      </p>
+      <p class="section-body" style="margin-top: 1rem;">
+        Fox & Paws is built on trust, reliability and a genuine bond with every pet I meet. Whether it's a muddy walk through the fields or a quiet afternoon keeping your cat company, I bring the same care and attention every single time.
+      </p>
+      <div class="about-card">
+        <p>🌿 Returning to the area and ready to meet your furry family. Get in touch to book a free meet & greet!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREA -->
+  <section id="area">
+    <div class="section-wrap">
+      <p class="section-label">Where we work</p>
+      <h2 class="section-title">Service Area</h2>
+      <p class="section-body">Fox & Paws is based in Brentwood and covers a range of nearby areas. Not sure if we come to you? Just drop us a message and we'll let you know.</p>
+      <div class="area-pills">
+        <span class="area-pill">📍 Brentwood</span>
+        <span class="area-pill">📍 West Horndon</span>
+        <span class="area-pill">📍 Surrounding Areas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-wrap" style="text-align:center;">
+      <p class="section-label">Say hello</p>
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-body">Ready to book, or just want to find out more? Reach out — Sare will get back to you as soon as she can.</p>
+
+      <div class="contact-stack">
+        <a class="contact-btn btn-call" href="tel:07417382309">
+          📞 Call — 07417 382 309
+        </a>
+        <a class="contact-btn btn-whatsapp" href="https://wa.me/447417382309">
+          💬 Message on WhatsApp
+        </a>
+        <a class="contact-btn btn-instagram" href="https://instagram.com/foxandpawsadventures" target="_blank" rel="noopener">
+          📸 @foxandpawsadventures
+        </a>
+      </div>
+
+      <p class="contact-note">
+        Based in Brentwood, Essex · Serving West Horndon & surrounding areas<br>
+        Fox & Paws Pet Services
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Fox & Paws Pet Services · Brentwood, Essex
+  </footer>
+
 </body>
 </html>
